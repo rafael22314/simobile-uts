@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class HomePage {
+  jumlahProduk: number = 0;
+  totalTransaksiHariIni: number = 0;
+  produkTerlaris: string = "-";
 
   constructor() {}
 
