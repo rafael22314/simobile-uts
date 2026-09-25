@@ -10,8 +10,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
+  },  {
     path: 'produk',
     loadChildren: () => import('./produk/produk.module').then( m => m.ProdukPageModule)
   },
@@ -20,12 +19,12 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'pengaturan',
-    loadChildren: () => import('./pengaturan/pengaturan.module').then( m => m.PengaturanPageModule)
-  },
-  {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+  {
+    path: 'pengaturan',
+    loadChildren: () => import('./pengaturan/pengaturan.module').then( m => m.PengaturanPageModule)
   },
   {
     path: 'transaksi',

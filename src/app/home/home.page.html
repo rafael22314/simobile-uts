@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-
-    <!-- UI Kiri -->
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Blank</ion-title>
+    <ion-title>
+      Dashboard
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,6 +21,35 @@
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
+  <ion-card>
+      <ion-card-header>
+        <ion-card-title>Jumlah Produk</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <h2>{{ jumlahProduk }}</h2>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Total Transaksi Hari Ini</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <h2>Rp {{ totalTransaksiHariIni }}</h2>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Produk Terlaris</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <h2>{{ produkTerlaris }}</h2>
+      </ion-card-content>
+    </ion-card>
 
   
 </ion-content>
