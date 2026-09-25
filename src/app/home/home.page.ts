@@ -12,5 +12,4 @@ export class HomePage {
   produkTerlaris: string = "-";
 
   constructor() {}
-
 }

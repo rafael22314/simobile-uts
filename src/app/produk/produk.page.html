@@ -15,4 +15,77 @@
       <ion-title size="large">produk</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>Tambah Produk</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-input
+          placeholder="Nama Produk"
+          [(ngModel)]="new_name">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          placeholder="Kategori"
+          [(ngModel)]="new_category">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="number"
+          placeholder="Harga Beli"
+          [(ngModel)]="new_buyPrice">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="number"
+          placeholder="Harga Jual"
+          [(ngModel)]="new_sellPrice">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="number"
+          placeholder="Stok"
+          [(ngModel)]="new_stock">
+        </ion-input>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        (click)="addProduct()">
+        Tambah Produk
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- SEARCH -->
+  <ion-searchbar
+    [(ngModel)]="keyword">
+  </ion-searchbar>
+
+  <!-- LIST PRODUK -->
+
+  <ion-list>
+    <ion-item
+      *ngFor="let p of productService.listOfProduct">
+      <ion-label>
+        <h2>{{p.name}}</h2>
+        <p>{{p.category}}</p>
+        <p>Stok : {{p.stock}}</p>
+        <p>Rp {{p.sellPrice}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
