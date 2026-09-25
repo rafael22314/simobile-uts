@@ -1,11 +1,12 @@
 <ion-app>
-
   <ion-menu auto-hide="true" contentId="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menu List</ion-title>
       </ion-toolbar>
     </ion-header>
+
+    <!-- Tampilan Kiri -->
     <ion-content class="ion-padding">
       <ion-list>
         <ion-item routerLink="/home">
@@ -28,20 +29,10 @@
     </ion-content>
   </ion-menu>
 
+  <!-- nampilkan halaman yang dipilih -->
   <ion-router-outlet id="main-content"></ion-router-outlet>
-  <ion-app>
-  <ion-menu auto-hide="true" contentId="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu List</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-    </ion-content>
-  </ion-menu>
 
-
-  <ion-router-outlet id="main-content"></ion-router-outlet>
+  <!-- Tampilan Bawah -->
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="pengaturan">
@@ -60,5 +51,4 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
-</ion-app>
 </ion-app>
