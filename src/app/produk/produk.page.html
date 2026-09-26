@@ -76,16 +76,30 @@
   </ion-searchbar>
 
   <!-- LIST PRODUK -->
-
   <ion-list>
-    <ion-item
-      *ngFor="let p of productService.listOfProduct">
+    <ion-item *ngFor="let p of filteredProducts; let i = index">
       <ion-label>
         <h2>{{p.name}}</h2>
         <p>{{p.category}}</p>
         <p>Stok : {{p.stock}}</p>
         <p>Rp {{p.sellPrice}}</p>
       </ion-label>
+
+      <ion-button
+        slot="end"
+        fill="clear"
+        color="warning"
+        (click)="editProduct(i)">
+        Edit
+      </ion-button>
+
+      <ion-button
+        slot="end"
+        fill="clear"
+        color="danger"
+        (click)="hapusProduct(i)">
+        Hapus
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

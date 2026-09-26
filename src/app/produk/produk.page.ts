@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../services/product';
+// untuk pop up //
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-produk',
@@ -17,7 +19,7 @@ export class ProdukPage {
 
   keyword = "";
 
-  constructor(public productService: ProductService) { }
+  constructor(public productService: ProductService, private alertController: AlertController) { }
 
   addProduct() {
 
@@ -30,5 +32,82 @@ export class ProdukPage {
       ""
     );
   }
+
+  get filteredProducts() {
+    return this.productService.listOfProduct.filter((p) =>
+      p.name.toLowerCase().includes(this.keyword.toLowerCase()) ||
+      p.category.toLowerCase().includes(this.keyword.toLowerCase())
+    );
+  }
+
+  async hapusProduct(index: number){
+    const alert = await this.alertController.create({
+      header: 'Hapus Produk',
+      message: 'Yakin ingin menghapus produk ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel'
+        },
+        {
+          text: 'Hapus',
+          handler: () => {
+            this.productService.listOfProduct.splice(index, 1);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async editProduct(index: number) {
+    let p = this.productService.listOfProduct[index];
+    const alert = await this.alertController.create({
+      header: 'Edit Produk',
+      inputs: [
+        {
+          name: 'name',
+          type: 'text',
+          value: p.name,
+          placeholder: 'Nama Produk'
+        },
+        {
+          name: 'category',
+          type: 'text',
+          value: p.category,
+          placeholder: 'Kategori'
+        },
+        {
+          name: 'sellPrice',
+          type: 'number',
+          value: p.sellPrice
+        },
+        {
+          name: 'stock',
+          type: 'number',
+          value: p.stock
+        }
+      ],
+
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel'
+        },
+        {
+          text: 'Simpan',
+          handler: (data) => {
+            p.name = data.name;
+            p.category = data.category;
+            p.sellPrice = Number(data.sellPrice);
+            p.stock = Number(data.stock);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 
 }
