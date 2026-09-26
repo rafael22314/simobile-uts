@@ -29,13 +29,6 @@ export class ProdukPage {
       this.new_stock,
       ""
     );
-
-    this.new_name = "";
-    this.new_category = "";
-    this.new_buyPrice = 0;
-    this.new_sellPrice = 0;
-    this.new_stock = 0;
-
   }
 
 }
