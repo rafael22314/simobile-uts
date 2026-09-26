@@ -11,3 +11,22 @@
     </ion-toolbar>
   </ion-header>
 </ion-content>
+
+ <ion-list>
+
+    <ion-item>
+      <ion-label>
+        <h2>Mode Gelap</h2>
+        <p>Aktifkan tampilan gelap aplikasi</p>
+      </ion-label>
+
+      <ion-toggle
+        slot="end"
+        [checked]="darkMode"
+        (ionChange)="toggleDarkMode($event)">
+      </ion-toggle>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
