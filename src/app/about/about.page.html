@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>about</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Tentang Aplikasi</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">about</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="about-container">
+
+    <h1>SIMOBILE</h1>
+
+    <p class="description">
+      Aplikasi kasir sederhana untuk Toko Makmur Jaya.
+      Versi
+      <span class="version">1.0.0</span>.
+    </p>
+
+    <p class="made-with">
+      Dibuat dengan Ionic Angular sebagai project UTS.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="status">
+      <span class="status-dot"></span>
+      <span>Status: Aktif</span>
+    </div>
+
+  </div>
+
 </ion-content>
