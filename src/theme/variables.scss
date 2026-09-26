@@ -15,9 +15,11 @@
 
   --ion-background-color: #ffffff;
   --ion-text-color: #222222;
+
+  color-scheme: light; // cegah browser/OS override otomatis ke dark
 }
 
-/*DARK MODE*/
+/* DARK MODE */
 body.dark {
   --ion-background-color: #121212;
   --ion-background-color-rgb: 18, 18, 18;
@@ -34,4 +36,6 @@ body.dark {
   --ion-color-secondary-rgb: 255, 183, 77;
   --ion-color-secondary-contrast: #000000;
   --ion-color-secondary-contrast-rgb: 0, 0, 0;
+
+  color-scheme: dark;
 }
