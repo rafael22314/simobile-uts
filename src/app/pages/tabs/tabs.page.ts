@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../services/cart';
 
 @Component({
   selector: 'app-tabs',
@@ -6,11 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabs.page.scss'],
   standalone: false,
 })
-export class TabsPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class TabsPage {
+  constructor(public cartService: CartService) { }
 }
