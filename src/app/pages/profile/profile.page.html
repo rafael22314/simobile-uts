@@ -1,13 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profil Pemilik</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding ion-text-center">
+  <div id="profile-card" style="margin-top: 20px;">
+    <ion-avatar style="width: 120px; height: 120px; margin: 0 auto;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/White_domesticated_duck%2C_stretching.jpg?utm_source=id.wikipedia.org&utm_campaign=index&utm_content=original" alt="Bu Marni" />
+    </ion-avatar>
+
+    <h2 class="ion-padding-top"><b>Ibu Marni</b></h2>
+    <p>Pemilik Toko Makmur Jaya</p>
+
+    <ion-chip color="primary">
+      <ion-icon name="storefront-outline"></ion-icon>
+      <ion-label>Warung Kelontong</ion-label>
+    </ion-chip>
+    <ion-chip color="success">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <ion-label>Kasir Aktif</ion-label>
+    </ion-chip>
+  </div>
 </ion-content>
