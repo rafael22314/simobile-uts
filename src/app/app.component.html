@@ -1,54 +1,47 @@
 <ion-app>
-  <ion-menu auto-hide="true" contentId="main-content">
+  <!-- Side Drawer Menu -->
+  <ion-menu contentId="main-content" auto-hide="true">
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu List</ion-title>
+      <ion-toolbar color="primary">
+        <ion-title>Toko Makmur Jaya</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <!-- Tampilan Kiri -->
     <ion-content class="ion-padding">
       <ion-list>
-        <ion-item routerLink="/home">
-          <ion-icon name="home" slot="start"></ion-icon>
-          <ion-label>Home</ion-label>
-        </ion-item>
-        <ion-item routerLink="/produk">
-          <ion-icon name="list" slot="start"></ion-icon>
-          <ion-label>Produk</ion-label>
-        </ion-item>
-        <ion-item routerLink="/transaksi">
-          <ion-icon name="log-in-outline" slot="start"></ion-icon>
-          <ion-label>Transaksi</ion-label>
-        </ion-item>
-        <ion-item routerLink="/profile">
-          <ion-icon name="person-outline" slot="start"></ion-icon>
-          <ion-label>Profile</ion-label>
-        </ion-item>
+        <ion-list-header>Menu Samping</ion-list-header>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/tabs/dashboard" lines="none">
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            <ion-label>Dashboard Utama</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/transactions" lines="none">
+            <ion-icon name="receipt-outline" slot="start"></ion-icon>
+            <ion-label>Riwayat Transaksi</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/settings" lines="none">
+            <ion-icon name="settings-outline" slot="start"></ion-icon>
+            <ion-label>Pengaturan & Tema</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/about" lines="none">
+            <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+            <ion-label>Tentang SIMOBILE</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>
 
-  <!-- nampilkan halaman yang dipilih -->
+  <!-- Main Container -->
   <ion-router-outlet id="main-content"></ion-router-outlet>
-
-  <!-- Tampilan Bawah -->
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="pengaturan">
-        <ion-icon name="settings"></ion-icon>
-        <ion-label>Pengaturan</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="about">
-        <ion-icon name="help-circle-outline"></ion-icon>
-        <ion-label>About</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="logout">
-        <ion-icon name="log-out-outline"></ion-icon>
-        <ion-label>Logout</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
 </ion-app>
