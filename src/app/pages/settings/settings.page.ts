@@ -4,13 +4,16 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
-  standalone: false,
+  standalone: false
 })
 export class SettingsPage implements OnInit {
-
-  constructor() { }
+  isDarkMode = false;
 
   ngOnInit() {
+    this.isDarkMode = document.body.classList.contains('dark');
   }
 
+  toggleTheme() {
+    document.body.classList.toggle('dark', this.isDarkMode);
+  }
 }
