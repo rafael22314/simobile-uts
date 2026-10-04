@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>transactions</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Riwayat Penjualan</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">transactions</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-accordion-group expand="inset">
+    <ion-accordion *ngFor="let t of trxService.getTransactions()">
+      <ion-item slot="header" color="light">
+        <ion-label>
+          <h2><b>{{ t.id }}</b></h2>
+          <p>{{ t.date | date:'dd MMM yyyy, HH:mm' }}</p>
+        </ion-label>
+        <ion-note slot="end" color="primary">
+          <b>Rp {{ t.totalAmount.toLocaleString('id-ID') }}</b>
+        </ion-note>
+      </ion-item>
+
+      <div class="ion-padding" slot="content">
+        <p><b>Daftar Belanja:</b></p>
+        <ion-list lines="none">
+          <ion-item *ngFor="let item of t.items">
+            <ion-label>{{ item.product.name }} (x{{ item.qty }})</ion-label>
+            <ion-note slot="end">Rp {{ item.subtotal.toLocaleString('id-ID') }}</ion-note>
+          </ion-item>
+        </ion-list>
+        <hr>
+        <p><small>Keuntungan bersih: Rp {{ t.totalProfit.toLocaleString('id-ID') }}</small></p>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>
