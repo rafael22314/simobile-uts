@@ -1,13 +1,74 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title>Dashboard Toko</ion-title>
+    <!-- Tombol Reload / Refresh di kanan atas -->
+    <ion-buttons slot="end">
+      <ion-button (click)="playBannerAnimation()">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- Banner yang animasi -->
+  <div id="welcome-banner">
+    <h2>Halo, Bu Marni! 👋</h2>
+    <p>Ringkasan penjualan Toko Makmur Jaya hari ini:</p>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <!-- Total Produk -->
+      <ion-col size="6">
+        <ion-card color="secondary">
+          <ion-card-header>
+            <ion-card-subtitle>Total Produk</ion-card-subtitle>
+            <ion-card-title>{{ getTotalProducts() }} Macam</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <!-- Transaksi Hari Ini -->
+      <ion-col size="6">
+        <ion-card color="warning">
+          <ion-card-header>
+            <ion-card-subtitle>Transaksi Hari Ini</ion-card-subtitle>
+            <ion-card-title>{{ getTodayTrxCount() }} Nota</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <!-- Total Omset -->
+      <ion-col size="12">
+        <ion-card color="success">
+          <ion-card-header>
+            <ion-card-subtitle>Total Omset Hari Ini</ion-card-subtitle>
+            <ion-card-title>Rp {{ getTodaySales().toLocaleString('id-ID') }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <!-- Produk Paling Laris -->
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Produk Paling Laris !!!</ion-card-subtitle>
+            <ion-card-title color="primary">{{ getBestSeller() }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Data ini selalu diperbarui otomatis setiap transaksi berhasil dicatat.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
