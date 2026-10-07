@@ -26,7 +26,7 @@ export class ProductsPage implements OnInit {
     this.loadProducts();
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.loadProducts();
   }
 
