@@ -13,9 +13,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Searchbar ditaruh di sini agar 100% bebas klik & fokus -->
-  <ion-searchbar placeholder="Ketik nama atau kategori barang..." (ionInput)="onSearch($event)"
-    style="margin-bottom: 12px;">
+  <ion-searchbar placeholder="Ketik nama atau kategori barang..." [(ngModel)]="searchKeyword" (ionInput)="onSearch()">
   </ion-searchbar>
 
   <ion-list>

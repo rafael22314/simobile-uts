@@ -55,4 +55,22 @@ export class ProductsService {
             }
         }
     }
+    updateProduct(id: number, newName: string, newStock: number) {
+        for (let i = 0; i < ProductsService.products.length; i++) {
+            if (ProductsService.products[i].id === id) {
+                ProductsService.products[i].name = newName;
+                ProductsService.products[i].stock = newStock;
+                break;
+            }
+        }
+    }
+    deleteProduct(id: number) {
+        let temp: Product[] = [];
+        for (let i = 0; i < ProductsService.products.length; i++) {
+            if (ProductsService.products[i].id !== id) {
+                temp.push(ProductsService.products[i]);
+            }
+        }
+        ProductsService.products = temp;
+    }
 }

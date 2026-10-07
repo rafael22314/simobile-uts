@@ -34,8 +34,8 @@ export class ProductsPage implements OnInit {
     this.filteredProducts = [...this.prodService.getProducts()];
   }
 
-  onSearch(event: any) {
-    const val = (event.target.value || '').toLowerCase();
+  onSearch() {
+    const val = (this.searchKeyword || '').toLowerCase().trim();
     this.filteredProducts = this.prodService.getProducts().filter(p =>
       p.name.toLowerCase().includes(val) ||
       p.category.toLowerCase().includes(val)

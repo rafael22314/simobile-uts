@@ -3,50 +3,59 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/products"></ion-back-button>
     </ion-buttons>
-    <ion-title>Detail Barang</ion-title>
+    <ion-title>Detail & Edit Produk</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding" *ngIf="product">
+  <!-- Kartu Info Produk -->
   <ion-card>
-    <!-- perubahan disini -->
-    <img [src]="product.imageUrl || prodService.defaultImage" alt="{{ product.name }}"
-      style="max-height: 220px; width: 100%; object-fit: cover;" />
+    <img [src]="product.imageUrl || prodService.defaultImage" style="width: 100%; height: 200px; object-fit: cover;" />
     <ion-card-header>
-      <ion-card-subtitle>{{ product.category }}</ion-card-subtitle>
+      <ion-card-subtitle>{{ product.category }} (Terjual: {{ product.soldCount }})</ion-card-subtitle>
       <ion-card-title>{{ product.name }}</ion-card-title>
     </ion-card-header>
-
     <ion-card-content>
-      <ion-list lines="full">
-        <ion-item>
-          <ion-label>Sisa Stok</ion-label>
-          <ion-badge slot="end" [color]="product.stock > 0 ? 'success' : 'danger'">
-            {{ product.stock }} pcs
-          </ion-badge>
+      <p>Harga Beli: <b>Rp {{ product.buyPrice.toLocaleString('id-ID') }}</b></p>
+      <p>Harga Jual: <b style="color: #1b8a5a;">Rp {{ product.sellPrice.toLocaleString('id-ID') }}</b></p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Form Edit Nama dan Stok -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-size: 1.1rem;">Ubah Data Produk</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item lines="full">
+          <ion-label position="stacked">Nama Produk</ion-label>
+          <ion-input type="text" [(ngModel)]="editName" placeholder="Masukkan nama baru"></ion-input>
         </ion-item>
-        <ion-item>
-          <ion-label>Harga Beli (Modal)</ion-label>
-          <ion-note slot="end">Rp {{ product.buyPrice.toLocaleString('id-ID') }}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Harga Jual</ion-label>
-          <ion-note slot="end" color="primary"><b>Rp {{ product.sellPrice.toLocaleString('id-ID') }}</b></ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Estimasi Keuntungan / pcs</ion-label>
-          <ion-note slot="end" color="success">
-            <b>Rp {{ (product.sellPrice - product.buyPrice).toLocaleString('id-ID') }}</b>
-          </ion-note>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Stok Produk</ion-label>
+          <ion-input type="number" [(ngModel)]="editStock" placeholder="Masukkan stok"></ion-input>
         </ion-item>
       </ion-list>
 
-      <div class="ion-padding-top">
-        <ion-button expand="block" [disabled]="product.stock === 0" (click)="cartService.addToCart(product)">
-          <ion-icon name="cart-outline" slot="start"></ion-icon>
-          Tambah ke Keranjang
+      <div style="margin-top: 15px;">
+        <!-- Tombol Simpan Perubahan -->
+        <ion-button expand="block" color="primary" (click)="saveChanges()">
+          <ion-icon name="save-outline" slot="start"></ion-icon>
+          Simpan Perubahan
+        </ion-button>
+
+        <!-- Tombol Hapus Produk (Membuka ion-alert) -->
+        <ion-button expand="block" color="danger" fill="outline" id="open-delete-alert" style="margin-top: 10px;">
+          <ion-icon name="trash-outline" slot="start"></ion-icon>
+          Hapus Produk
         </ion-button>
       </div>
     </ion-card-content>
   </ion-card>
+  
+  <ion-alert trigger="open-delete-alert" header="Konfirmasi Hapus"
+    message="Apakah Anda yakin ingin menghapus produk ini dari daftar?" [buttons]="alertButtons">
+  </ion-alert>
 </ion-content>
