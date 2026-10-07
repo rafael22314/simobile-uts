@@ -8,12 +8,14 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- cek apakah listcart memiliki data, bila tidak menampilkan keranjang masih kosong -->
   <div *ngIf="cartService.getCart().length === 0" class="ion-text-center ion-padding">
     <ion-icon name="cart-outline" style="font-size: 64px;" color="medium"></ion-icon>
     <p>Keranjang masih kosong.</p>
     <ion-button routerLink="/tabs/products" fill="outline">Pilih Barang</ion-button>
   </div>
 
+  <!-- cek apakah listcart memiliki data, bila ada menampilkan list produk yang dipilih -->
   <ion-list *ngIf="cartService.getCart().length > 0">
     <ion-item *ngFor="let item of cartService.getCart()">
       <ion-label>
@@ -21,11 +23,14 @@
         <p>Rp {{ item.product.sellPrice.toLocaleString('id-ID') }} x {{ item.qty }}</p>
         <p><b>Subtotal: Rp {{ item.subtotal.toLocaleString('id-ID') }}</b></p>
       </ion-label>
-
+      
+      <!-- Memanggil method decreaseQty -->
       <ion-buttons slot="end">
         <ion-button (click)="cartService.decreaseQty(item.product.id)">
           <ion-icon name="remove-circle-outline"></ion-icon>
         </ion-button>
+
+        <!-- Memanggil method addToCart -->
         <ion-text><b>{{ item.qty }}</b></ion-text>
         <ion-button (click)="cartService.addToCart(item.product)" [disabled]="item.qty >= item.product.stock">
           <ion-icon name="add-circle-outline"></ion-icon>
@@ -35,21 +40,29 @@
   </ion-list>
 </ion-content>
 
+<!-- cek apakah listcart memiliki data, bila tidak menampilkan keranjang masih kosong -->
 <ion-footer *ngIf="cartService.getCart().length > 0">
   <ion-toolbar class="ion-padding-horizontal">
     <ion-item lines="none">
+
+      <!-- Total Tagihan -->
       <ion-label>Total Tagihan:</ion-label>
+
+      <!-- Memanggil method dan method return total Tagihan / harga -->
       <ion-text color="primary" slot="end">
         <h3><b>Rp {{ cartService.getTotalPrice().toLocaleString('id-ID') }}</b></h3>
       </ion-text>
     </ion-item>
+
+    <!-- Button Checkout untuk memanggil method checkout -->
     <ion-button id="btn-checkout" expand="block" color="success" (click)="confirmCheckout()">
       Konfirmasi Transaksi
     </ion-button>
   </ion-toolbar>
 </ion-footer>
 
-<!-- Alert Sukses Transaksi -->
+<!-- Alert Sukses Transaksi : Message box -->
+<!-- (didDismiss)="finishCheckout()"> untuk kalau ditutup run method -->
 <ion-alert [isOpen]="isTrxSuccess" header="Transaksi Berhasil!" [message]="checkoutMsg" [buttons]="['Cetak / Selesai']"
   (didDismiss)="finishCheckout()">
 </ion-alert>

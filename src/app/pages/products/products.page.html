@@ -1,9 +1,15 @@
+<!-- Header halaman daftar produk -->
 <ion-header>
   <ion-toolbar color="primary">
+    <!-- Tombol membuka menu samping -->
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+
+    <!-- Judul halaman -->
     <ion-title>Daftar Barang</ion-title>
+
+    <!-- Tombol menuju halaman tambah produk -->
     <ion-buttons slot="end">
       <ion-button routerLink="/product-form">
         <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
@@ -13,33 +19,56 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-searchbar placeholder="Ketik nama atau kategori barang..." [(ngModel)]="searchKeyword" (ionInput)="onSearch()">
+  <!-- Input pencarian produk -->
+  <ion-searchbar
+    placeholder="Ketik nama atau kategori barang..."
+    [(ngModel)]="searchKeyword"
+    (ionInput)="onSearch()"
+  >
   </ion-searchbar>
 
+  <!-- Daftar produk -->
   <ion-list>
+    <!-- Menampilkan setiap produk -->
     <ion-item *ngFor="let p of filteredProducts">
-      <!-- Thumbnail -->
+      <!-- Gambar produk -->
       <ion-thumbnail slot="start" (click)="goToDetail(p.id)">
-        <img [src]="p.imageUrl ? p.imageUrl : prodService.defaultImage" alt="{{ p.name }}" />
+        <img
+          [src]="p.imageUrl ? p.imageUrl : prodService.defaultImage"
+          alt="{{ p.name }}"
+        />
       </ion-thumbnail>
 
-      <!-- Info produk -->
+      <!-- Informasi produk -->
       <ion-label (click)="goToDetail(p.id)">
         <h2><b>{{ p.name }}</b></h2>
+
+        <!-- Kategori produk -->
         <p>Kategori: {{ p.category }}</p>
+
+        <!-- Harga jual produk -->
         <p>Harga: <b>Rp {{ p.sellPrice.toLocaleString('id-ID') }}</b></p>
+
+        <!-- Status stok produk -->
         <ion-badge [color]="p.stock > 0 ? 'success' : 'danger'">
           Stok: {{ p.stock }}
         </ion-badge>
       </ion-label>
 
-      <!-- Tombol kranjang -->
-      <ion-button id="btn-add-{{p.id}}" slot="end" size="small" color="primary" [disabled]="p.stock === 0"
-        (click)="$event.stopPropagation(); addToCart(p)">
+      <!-- Tombol tambah ke keranjang -->
+      <ion-button
+        id="btn-add-{{p.id}}"
+        slot="end"
+        size="small"
+        color="primary"
+        [disabled]="p.stock === 0"
+        (click)="$event.stopPropagation(); addToCart(p)"
+      >
         <ion-icon slot="icon-only" name="cart"></ion-icon>
       </ion-button>
     </ion-item>
 
+    <!-- Pesan jika tidak ada produk yang ditemukan -->
     <ion-item *ngIf="filteredProducts.length === 0">
       <ion-label class="ion-text-center" color="medium">
         Barang tidak ditemukan.

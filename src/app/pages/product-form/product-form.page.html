@@ -1,28 +1,47 @@
+<!-- Header halaman -->
 <ion-header>
   <ion-toolbar color="primary">
+    <!-- Tombol kembali ke halaman produk -->
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/products"></ion-back-button>
     </ion-buttons>
+
+    <!-- Judul halaman -->
     <ion-title>Tambah Barang Baru</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- Form tambah produk -->
   <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+    <!-- Daftar input produk -->
     <ion-list lines="full">
-      <!-- Nama Produk -->
+      <!-- Input nama produk -->
       <ion-item>
-        <ion-input label="Nama Barang" labelPlacement="stacked" formControlName="name"
-          placeholder="Misal: Sabun Mandi"></ion-input>
+        <ion-input
+          label="Nama Barang"
+          labelPlacement="stacked"
+          formControlName="name"
+          placeholder="Misal: Sabun Mandi"
+        ></ion-input>
       </ion-item>
-      <ion-text color="danger" class="ion-padding-start"
-        *ngIf="productForm.controls['name'].invalid && productForm.controls['name'].touched">
+
+      <!-- Pesan error jika nama produk tidak valid -->
+      <ion-text
+        color="danger"
+        class="ion-padding-start"
+        *ngIf="productForm.controls['name'].invalid && productForm.controls['name'].touched"
+      >
         <small>* Nama barang wajib diisi (minimal 3 karakter).</small>
       </ion-text>
 
-      <!-- Kategori -->
+      <!-- Input kategori produk -->
       <ion-item>
-        <ion-select label="Kategori" labelPlacement="stacked" formControlName="category">
+        <ion-select
+          label="Kategori"
+          labelPlacement="stacked"
+          formControlName="category"
+        >
           <ion-select-option value="Sembako">Sembako</ion-select-option>
           <ion-select-option value="Makanan">Makanan</ion-select-option>
           <ion-select-option value="Minuman">Minuman</ion-select-option>
@@ -31,41 +50,76 @@
         </ion-select>
       </ion-item>
 
-      <!-- Harga Beli -->
+      <!-- Input harga beli -->
       <ion-item>
-        <ion-input type="number" label="Harga Beli (Modal)" labelPlacement="stacked"
-          formControlName="buyPrice"></ion-input>
+        <ion-input
+          type="number"
+          label="Harga Beli (Modal)"
+          labelPlacement="stacked"
+          formControlName="buyPrice"
+        ></ion-input>
       </ion-item>
-      <ion-text color="danger" class="ion-padding-start"
-        *ngIf="productForm.controls['buyPrice'].invalid && productForm.controls['buyPrice'].touched">
+
+      <!-- Pesan error jika harga beli tidak valid -->
+      <ion-text
+        color="danger"
+        class="ion-padding-start"
+        *ngIf="productForm.controls['buyPrice'].invalid && productForm.controls['buyPrice'].touched"
+      >
         <small>* Harga beli harus berupa angka lebih dari 0.</small>
       </ion-text>
 
-      <!-- Harga Jual -->
+      <!-- Input harga jual -->
       <ion-item>
-        <ion-input type="number" label="Harga Jual" labelPlacement="stacked" formControlName="sellPrice"></ion-input>
+        <ion-input
+          type="number"
+          label="Harga Jual"
+          labelPlacement="stacked"
+          formControlName="sellPrice"
+        ></ion-input>
       </ion-item>
-      <ion-text color="danger" class="ion-padding-start"
-        *ngIf="productForm.controls['sellPrice'].invalid && productForm.controls['sellPrice'].touched">
+
+      <!-- Pesan error jika harga jual tidak valid -->
+      <ion-text
+        color="danger"
+        class="ion-padding-start"
+        *ngIf="productForm.controls['sellPrice'].invalid && productForm.controls['sellPrice'].touched"
+      >
         <small>* Harga jual harus berupa angka lebih dari 0.</small>
       </ion-text>
 
-      <!-- Stok -->
+      <!-- Input jumlah stok -->
       <ion-item>
-        <ion-input type="number" label="Jumlah Stok" labelPlacement="stacked" formControlName="stock"></ion-input>
+        <ion-input
+          type="number"
+          label="Jumlah Stok"
+          labelPlacement="stacked"
+          formControlName="stock"
+        ></ion-input>
       </ion-item>
-      <ion-text color="danger" class="ion-padding-start"
-        *ngIf="productForm.controls['stock'].invalid && productForm.controls['stock'].touched">
+
+      <!-- Pesan error jika stok tidak valid -->
+      <ion-text
+        color="danger"
+        class="ion-padding-start"
+        *ngIf="productForm.controls['stock'].invalid && productForm.controls['stock'].touched"
+      >
         <small>* Stok tidak boleh bernilai negatif.</small>
       </ion-text>
 
-      <!-- URL Foto (Opsional) -->
+      <!-- Input URL gambar produk (opsional) -->
       <ion-item>
-        <ion-input type="url" label="URL Foto (Opsional)" labelPlacement="stacked" formControlName="imageUrl"
-          placeholder="https://..."></ion-input>
+        <ion-input
+          type="url"
+          label="URL Foto (Opsional)"
+          labelPlacement="stacked"
+          formControlName="imageUrl"
+          placeholder="https://..."
+        ></ion-input>
       </ion-item>
     </ion-list>
 
+    <!-- Tombol simpan produk -->
     <div class="ion-padding-top">
       <ion-button expand="block" type="submit" [disabled]="productForm.invalid">
         Simpan Barang
@@ -73,7 +127,13 @@
     </div>
   </form>
 
-  <ion-alert [isOpen]="isSuccessAlertOpen" header="Sukses" message="Barang baru berhasil ditambahkan!"
-    [buttons]="['OK']" (didDismiss)="handleAlertDismiss()">
+  <!-- Pop-up sukses setelah produk berhasil ditambahkan -->
+  <ion-alert
+    [isOpen]="isSuccessAlertOpen"
+    header="Sukses"
+    message="Barang baru berhasil ditambahkan!"
+    [buttons]="['OK']"
+    (didDismiss)="handleAlertDismiss()"
+  >
   </ion-alert>
 </ion-content>

@@ -1,35 +1,62 @@
+<!-- Header halaman riwayat penjualan -->
 <ion-header>
   <ion-toolbar color="primary">
+    <!-- Tombol kembali ke dashboard -->
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/dashboard"></ion-back-button>
     </ion-buttons>
+
+    <!-- Judul halaman -->
     <ion-title>Riwayat Penjualan</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- Daftar transaksi dalam bentuk accordion -->
   <ion-accordion-group expand="inset">
+    <!-- Menampilkan setiap transaksi -->
     <ion-accordion *ngFor="let t of trxService.getTransactions()">
+      <!-- Header transaksi -->
       <ion-item slot="header" color="light">
         <ion-label>
+          <!-- ID transaksi -->
           <h2><b>{{ t.id }}</b></h2>
+
+          <!-- Tanggal dan waktu transaksi -->
           <p>{{ t.date | date:'dd MMM yyyy, HH:mm' }}</p>
         </ion-label>
+
+        <!-- Total pembayaran transaksi -->
         <ion-note slot="end" color="primary">
           <b>Rp {{ t.totalAmount.toLocaleString('id-ID') }}</b>
         </ion-note>
       </ion-item>
 
+      <!-- Detail transaksi -->
       <div class="ion-padding" slot="content">
         <p><b>Daftar Belanja:</b></p>
+
+        <!-- Daftar produk yang dibeli -->
         <ion-list lines="none">
           <ion-item *ngFor="let item of t.items">
+            <!-- Nama produk dan jumlah beli -->
             <ion-label>{{ item.product.name }} (x{{ item.qty }})</ion-label>
-            <ion-note slot="end">Rp {{ item.subtotal.toLocaleString('id-ID') }}</ion-note>
+
+            <!-- Subtotal produk -->
+            <ion-note slot="end">
+              Rp {{ item.subtotal.toLocaleString('id-ID') }}
+            </ion-note>
           </ion-item>
         </ion-list>
-        <hr>
-        <p><small>Keuntungan bersih: Rp {{ t.totalProfit.toLocaleString('id-ID') }}</small></p>
+
+        <hr />
+
+        <!-- Keuntungan dari transaksi -->
+        <p>
+          <small>
+            Keuntungan bersih: Rp {{ t.totalProfit.toLocaleString('id-ID') }}
+          </small>
+        </p>
       </div>
     </ion-accordion>
   </ion-accordion-group>

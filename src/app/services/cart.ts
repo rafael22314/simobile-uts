@@ -2,87 +2,116 @@ import { Injectable } from '@angular/core';
 import { CartItem, Product } from '../models/pos.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-    private cart: CartItem[] = [];
+  // Menyimpan daftar barang dalam keranjang
+  private cart: CartItem[] = [];
 
-    getCart(): CartItem[] {
-        return this.cart;
+  // Mengambil isi keranjang
+  getCart(): CartItem[] {
+    return this.cart;
+  }
+
+  // Menambahkan barang ke keranjang
+  addToCart(product: Product): boolean {
+    // Cek stok barang
+    if (product.stock <= 0) {
+      return false;
     }
 
-    addToCart(product: Product): boolean {
-        if (product.stock <= 0) {
-            return false;
+    let found = false;
+
+    // Cek apakah barang sudah ada di keranjang
+    for (let i = 0; i < this.cart.length; i++) {
+      if (this.cart[i].product.id === product.id) {
+        found = true;
+
+        // Tambah jumlah barang jika stok masih tersedia
+        if (this.cart[i].qty < product.stock) {
+          this.cart[i].qty++;
+          this.cart[i].subtotal =
+            this.cart[i].qty * this.cart[i].product.sellPrice;
+
+          return true;
         }
-        let found = false;
-        for (let i = 0; i < this.cart.length; i++) {
-            if (this.cart[i].product.id === product.id) {
-                found = true;
-                if (this.cart[i].qty < product.stock) {
-                    this.cart[i].qty++;
-                    this.cart[i].subtotal = this.cart[i].qty * this.cart[i].product.sellPrice;
-                    return true;
-                }
-                return false; // Stok tidak mencukupi
-            }
-        }
-        // Jika belum ada di keranjang, masukkan barang baru
-        if (!found) {
-            this.cart.push({
-                product: product,
-                qty: 1,
-                subtotal: product.sellPrice
-            });
-            return true;
-        }
+
         return false;
+      }
     }
 
-    decreaseQty(productId: number) {
-        let tempCart: CartItem[] = [];
-        for (let i = 0; i < this.cart.length; i++) {
-            if (this.cart[i].product.id === productId) {
-                if (this.cart[i].qty > 1) {
-                    this.cart[i].qty--;
-                    this.cart[i].subtotal = this.cart[i].qty * this.cart[i].product.sellPrice;
-                    tempCart.push(this.cart[i]);
-                }
-                // Kalau qty tinggal 1, tidak di-push (otomatis terhapus)
-            } else {
-                tempCart.push(this.cart[i]);
-            }
+    // Tambah barang baru ke keranjang
+    if (!found) {
+      this.cart.push({
+        product: product,
+        qty: 1,
+        subtotal: product.sellPrice,
+      });
+
+      return true;
+    }
+
+    return false;
+  }
+
+  // Mengurangi jumlah barang di keranjang
+  decreaseQty(productId: number) {
+    let tempCart: CartItem[] = [];
+
+    for (let i = 0; i < this.cart.length; i++) {
+      if (this.cart[i].product.id === productId) {
+        if (this.cart[i].qty > 1) {
+          this.cart[i].qty--;
+          this.cart[i].subtotal =
+            this.cart[i].qty * this.cart[i].product.sellPrice;
+
+          tempCart.push(this.cart[i]);
         }
-        this.cart = tempCart;
+      } else {
+        tempCart.push(this.cart[i]);
+      }
     }
 
-    removeFromCart(productId: number) {
-        let tempCart: CartItem[] = [];
-        for (let i = 0; i < this.cart.length; i++) {
-            if (this.cart[i].product.id !== productId) {
-                tempCart.push(this.cart[i]);
-            }
-        }
-        this.cart = tempCart;
+    this.cart = tempCart;
+  }
+
+  // Menghapus barang dari keranjang
+  removeFromCart(productId: number) {
+    let tempCart: CartItem[] = [];
+
+    for (let i = 0; i < this.cart.length; i++) {
+      if (this.cart[i].product.id !== productId) {
+        tempCart.push(this.cart[i]);
+      }
     }
 
-    getTotalPrice(): number {
-        let total = 0;
-        for (let i = 0; i < this.cart.length; i++) {
-            total += this.cart[i].subtotal;
-        }
-        return total;
+    this.cart = tempCart;
+  }
+
+  // Menghitung total harga belanja
+  getTotalPrice(): number {
+    let total = 0;
+
+    for (let i = 0; i < this.cart.length; i++) {
+      total += this.cart[i].subtotal;
     }
 
-    getTotalItemsCount(): number {
-        let total = 0;
-        for (let i = 0; i < this.cart.length; i++) {
-            total += this.cart[i].qty;
-        }
-        return total;
+    return total;
+  }
+
+  // Menghitung total jumlah barang
+  getTotalItemsCount(): number {
+    let total = 0;
+
+    for (let i = 0; i < this.cart.length; i++) {
+      total += this.cart[i].qty;
     }
 
-    clearCart() {
-        this.cart = [];
-    }
+    return total;
+  }
+
+  // Mengosongkan keranjang
+  clearCart() {
+    this.cart = [];
+  }
 }

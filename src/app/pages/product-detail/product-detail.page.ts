@@ -9,24 +9,33 @@ import { ProductsService } from '../../services/products';
   styleUrls: ['./product-detail.page.scss'],
   standalone: false
 })
-export class ProductDetailPage implements OnInit {
-  product: Product | any = null;
 
-  // Variabel untuk menampung inputan edit (Two-way data binding Week 03)
+// implements OnInit supaya bisa menggunakan ngOnInit
+export class ProductDetailPage implements OnInit {
+  // Tipe data bisa product atau tipe data lain
+  product: Product | any = null;
+  
+  // Variabel untuk menampung inputan edit Two-way data binding
+  // nilai awal untuk inputan selanjutnya
   editName: string = '';
   editStock: number = 0;
 
-  // Tombol untuk pop-up konfirmasi hapus (Week 06 Slide 20)
+    // Tombol yang ditampilkan pada pop-up konfirmasi hapus
   public alertButtons = [
     {
+      // Menutup pop-up tanpa menghapus data
       text: 'Batal',
       role: 'cancel'
     },
     {
+      // Menghapus data yang dipilih
       text: 'Hapus',
       role: 'confirm',
       handler: () => {
+
+        // Menjalankan fungsi hapus
         this.confirmDelete();
+
       }
     }
   ];
@@ -38,11 +47,14 @@ export class ProductDetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Membaca ID dari URL parameter (Week 05 Slide 23-25)
+    // Ambil ID produk dari URL
     this.route.params.subscribe(params => {
+
       const id = Number(params['id']);
+      // Cari produk berdasarkan ID
       this.product = this.prodService.getProductById(id);
 
+      // Isi form edit dengan data produk
       if (this.product) {
         this.editName = this.product.name;
         this.editStock = this.product.stock;
@@ -51,17 +63,20 @@ export class ProductDetailPage implements OnInit {
   }
 
   // Simpan perubahan Nama & Stok
+  // trim : hapus spasi
   saveChanges() {
+
+    // cek apakah data yang diinputkan valid
     if (this.editName.trim() === '') {
       alert('Nama produk tidak boleh kosong!');
       return;
     }
-
     if (this.editStock < 0) {
       alert('Stok tidak boleh kurang dari 0!');
       return;
     }
 
+    // update produk
     this.prodService.updateProduct(this.product.id, this.editName, this.editStock);
     alert('Data produk berhasil diperbarui!');
     this.router.navigate(['/tabs/products']);
