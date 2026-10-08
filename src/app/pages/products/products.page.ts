@@ -30,7 +30,7 @@ export class ProductsPage implements OnInit {
     this.loadProducts();
   }
 
-  // Refresh data saat kembali ke halaman
+  // Refresh data saat kembali ke halaman mengupdate data paling baru
   ionViewDidEnter() {
     this.loadProducts();
   }
@@ -61,14 +61,12 @@ export class ProductsPage implements OnInit {
   // Menambahkan produk ke keranjang
   addToCart(product: Product) {
     const added = this.cartService.addToCart(product);
-
     if (added) {
       // Menjalankan animasi tombol saat produk berhasil ditambahkan
       const btn = document.querySelector(
         `#btn-add-${product.id}`,
-      ) as HTMLElement;
-
-      if (btn) {
+      ) as HTMLElement; //HTMLElement agar animasi dapat jalan di page html
+      if (btn) { //jika button di klik maka animasi akan dijalankan
         this.animationCtrl
           .create()
           .addElement(btn)

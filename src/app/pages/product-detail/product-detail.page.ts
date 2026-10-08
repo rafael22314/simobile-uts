@@ -24,8 +24,8 @@ export class ProductDetailPage implements OnInit {
   public alertButtons = [
     {
       // Menutup pop-up tanpa menghapus data
-      text: 'Batal',
-      role: 'cancel'
+      text: 'Batal', //tulisan button
+      role: 'cancel' //fungsi
     },
     {
       // Menghapus data yang dipilih

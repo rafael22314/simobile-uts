@@ -50,11 +50,11 @@ export class DashboardPage implements OnInit, ViewDidEnter {
     const banner = document.querySelector('#welcome-banner') as HTMLElement;
     if (!banner) return;
     const anim = this.animationCtrl.create()
-      .addElement(banner)
-      .duration(700)
-      .iterations(1)
-      .fromTo('opacity', '0', '1')
-      .fromTo('transform', 'translateY(-20px)', 'translateY(0px)');
-    anim.play();
+      .addElement(banner) //Memilih elemen banner yakni #welcome-banner
+      .duration(700) //durasi dari animasi nya berapa detik
+      .iterations(1) //dimainkan sebanyak 1 kali
+      .fromTo('opacity', '0', '1') //efek fade in > opacity, 0, 1
+      .fromTo('transform', 'translateY(-20px)', 'translateY(0px)'); //efek slide down (meluncur kebawh turun)
+    anim.play(); //jalan animasi
   }
 }

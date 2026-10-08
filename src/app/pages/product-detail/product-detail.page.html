@@ -37,6 +37,7 @@
     <ion-list>
         <ion-item lines="full">
           <ion-label position="stacked">Nama Produk</ion-label>
+          <!-- ngModel twoway data binding untuk edit nama stok dll (saat halaman dibuka kotak input dilayar otomatris sudsah terisi tulisan "Beras Ramos") -->
           <ion-input type="text" [(ngModel)]="editName" placeholder="Masukkan nama baru"></ion-input>
         </ion-item>
 
@@ -63,6 +64,7 @@
     </ion-card-content>
   </ion-card>
   
+  <!-- muncul popup yakin ingin menghapus dengan memanggil open-delete-alert diatas ini -->
   <ion-alert trigger="open-delete-alert" header="Konfirmasi Hapus"
     message="Apakah Anda yakin ingin menghapus produk ini dari daftar?" [buttons]="alertButtons">
   </ion-alert>

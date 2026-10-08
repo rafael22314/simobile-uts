@@ -22,10 +22,10 @@ export class ProfilePage implements ViewDidEnter {
 
       // Menjalankan animasi muncul pada card
       this.animationCtrl.create()
-        .addElement(card)
-        .duration(600)
-        .fromTo('transform', 'scale(0.8)', 'scale(1)')
-        .fromTo('opacity', '0', '1')
+        .addElement(card) //menentukan elemen yang dianimasikan
+        .duration(600) //durasi animasi
+        .fromTo('transform', 'scale(0.8)', 'scale(1)') //efek membesar 
+        .fromTo('opacity', '0', '1') //efek muncul
         .play();
     }
   }

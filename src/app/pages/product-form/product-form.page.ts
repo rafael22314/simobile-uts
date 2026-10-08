@@ -32,12 +32,12 @@ export class ProductFormPage implements OnInit {
   ) {
     // Membuat form dan validasi input
     this.productForm = this.fb.group({
-      name: ['', Validators.required],
-      category: ['Sembako', Validators.required],
-      buyPrice: [0, [Validators.required, Validators.min(100)]],
-      sellPrice: [0, [Validators.required, Validators.min(100)]],
-      stock: [1, [Validators.required, Validators.min(0)]],
-      imageUrl: [''],
+      name: ['', Validators.required], //nama produk harus diisi
+      category: ['Sembako', Validators.required], //category harus diisi 
+      buyPrice: [0, [Validators.required, Validators.min(100)]], //validator min (minimal input 100)
+      sellPrice: [0, [Validators.required, Validators.min(100)]], 
+      stock: [1, [Validators.required, Validators.min(0)]], //tidak boleh 0 atau negatif
+      imageUrl: [''], //kosong tanpa validator karena opsional
     });
   }
 
@@ -45,12 +45,13 @@ export class ProductFormPage implements OnInit {
 
   // Menyimpan produk baru
   saveProduct() {
+    //periksa memenuhi syarat atau tidak ?
     if (this.productForm.valid) {
       this.prodService.addProduct(this.productForm.value);
 
       // Tampilkan popup sukses
       this.isSuccessAlertOpen = true;
-    } else {
+    } else { //tidak memenuhi syarat
       alert('Mohon isi semua data dengan benar!');
     }
   }
